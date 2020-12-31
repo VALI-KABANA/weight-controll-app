@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MongoDB - @localhost">
+  <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.20">
+    <root id="1">
+      <ServerVersion>4.4.2</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="admin"/>
+    <schema id="3" parent="1" name="config"/>
+    <schema id="4" parent="1" name="knyazeva"/>
+    <schema id="5" parent="1" name="knyazevaDatabase"/>
+    <schema id="6" parent="1" name="local"/>
+    <schema id="7" parent="1" name="weight-app"/>
+    <table id="8" parent="7" name="users"/>
+    <table id="9" parent="7" name="weights"/>
+    <column id="10" parent="8" name="_id">
+      <DataType>ObjectId(0)|12s</DataType>
+    </column>
+    <column id="11" parent="8" name="hash">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="12" parent="8" name="login">
+      <Position>1</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="13" parent="9" name="_id">
+      <DataType>ObjectId(0)|12s</DataType>
+    </column>
+    <column id="14" parent="9" name="user">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="15" parent="9" name="date">
+      <Position>1</Position>
+      <DataType>Date(0)|91s</DataType>
+    </column>
+    <column id="16" parent="9" name="value">
+      <Position>1</Position>
+      <DataType>Integer|4s</DataType>
+    </column>
+  </database-model>
+</dataSource>
