@@ -46,31 +46,31 @@ description: <описание ошибки>
 
 ### Users
 
-[x] /users/authorize/
+- [x] /users/authorize/
   * Parameters:
     1. login
     2. password
   * return: result with description
 
-[x] /users/delete/
+- [x] /users/delete/
   * Parameters:
     1. login
     2. password
   * return: result with description
-[x] /users/find/
+- [x] /users/find/
   * Parameters:
     1. login
   * description: check if user with such login exists
   * return: result with description
 
-[x] /users/change_login/
+- [x] /users/change_login/
   * Parameters:
     1. login
     2. new_login
   * description: if user with specified $login exists, his login now is gonna be changed to $new_login
   * return: result with description
 
-[x] /users/change_login/
+- [x] /users/change_login/
   * Parameters:
     1. login
     2. new_password
@@ -79,7 +79,7 @@ description: <описание ошибки>
 
 ## Weights:
 
-[x] /weight/add/
+- [x] /weight/add/
   * Parameters:
     1. user's login
     2. date
@@ -87,7 +87,7 @@ description: <описание ошибки>
   * description: add a weight instance to the Database
   * return: result with description
   
-[ ] /weights/find/
+- [ ] /weights/find/
   * Parameters:
     1. user's login
     2. start
@@ -95,7 +95,7 @@ description: <описание ошибки>
   * description: finds such weights, that correspond to specified $user and is associated with a date in segment [$start, $end]
   * return: JSON array with found weights
 
-[ ]  /weights/delete
+- [ ]  /weights/delete
 * Parameters:
     1. user's login
     2. date
@@ -104,4 +104,4 @@ description: <описание ошибки>
 
 ## Покрытие тестами
 
-[x] Создать тесты
+- [ ] Создать тесты
