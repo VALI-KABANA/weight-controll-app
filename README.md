@@ -8,7 +8,13 @@
   * [Python language](https://en.wikipedia.org/wiki/Python_%28programming_language%29)
   * [MongoDB](https://en.wikipedia.org/wiki/MongoDB)
   * [Flask web framework](https://en.wikipedia.org/wiki/Flask_(web_framework))
-  * [Dcrypt hashing library](https://en.wikipedia.org/wiki/bcrypt)
+  * [Bcrypt hashing library](https://en.wikipedia.org/wiki/bcrypt)
 
 * Frontend:
   * [React framework](https://en.wikipedia.org/wiki/React_(web_framework))
+
+## Документация
+
+* [Backend](https://github.com/VALI-KABANA/weight-controll-app/blob/main/docs/back.md)
+* [Frontend](https://github.com/VALI-KABANA/weight-controll-app/blob/main/docs/front.md)
+
