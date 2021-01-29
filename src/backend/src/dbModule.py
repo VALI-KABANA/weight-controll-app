@@ -1,8 +1,7 @@
 from pymongo import MongoClient
 from flask import jsonify
 from dbLogger import CommandLogger
-from datetime import datetime
-from hasher import Hasher
+from hasher import are_similar, get_hash
 
 MONGO_CONNECTION_PORT = 27017
 
@@ -14,7 +13,6 @@ class DatabaseController:
         self.db = self.mongo_client['weight-app']
         self.weights = self.db['weights']
         self.users = self.db['users']
-        self.hasher = Hasher()
 
     def authorize(self, login, password):
         if not self.does_user_exist(login):
@@ -25,7 +23,7 @@ class DatabaseController:
         found_user = self.users.find({
             'login': login
         })
-        return self.hasher.are_similar(password, found_user[0]['hash'])
+        return are_similar(password, found_user[0]['hash'])
 
     def add_user(self, login, password):
         if self.does_user_exist(login):
@@ -33,7 +31,7 @@ class DatabaseController:
                 result='error',
                 desctiprion='User already exists'
             )
-        hashed_password = self.hasher.get_hash(password)
+        hashed_password = get_hash(password)
         self.users.insert_one({
             'login': login,
             'hash': hashed_password
@@ -84,7 +82,7 @@ class DatabaseController:
             self.users.update_one({
                     'login': login},
                 {'$set': {
-                    'hash': self.hasher.get_hash(new_password)
+                    'hash': get_hash(new_password)
                 }})
             return jsonify(
                 result='ok',
@@ -120,3 +118,7 @@ class DatabaseController:
                 result='ok',
                 desctiption='weight added to database'
             )
+
+    # TODO implement
+    def find_weight(self, login, start, end):
+        pass

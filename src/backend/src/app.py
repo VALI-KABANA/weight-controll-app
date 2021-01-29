@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from dbModule import DatabaseController
+
 app = Flask(__name__)
 
 db = DatabaseController()
@@ -85,5 +86,4 @@ def find_weights():
 
 
 if __name__ == "__main__":
-
     app.run()
