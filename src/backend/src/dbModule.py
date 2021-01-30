@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from flask import jsonify
+import time
 from dbLogger import CommandLogger
 from hasher import are_similar, get_hash
 
@@ -13,6 +14,7 @@ class DatabaseController:
         self.db = self.mongo_client['weight-app']
         self.weights = self.db['weights']
         self.users = self.db['users']
+        self.sessions = self.db['sessions']
 
     def authorize(self, login, password):
         if not self.does_user_exist(login):
@@ -23,7 +25,22 @@ class DatabaseController:
         found_user = self.users.find({
             'login': login
         })
-        return are_similar(password, found_user[0]['hash'])
+        if(are_similar(password, found_user[0]['hash'])):
+            token = int(time.time())
+            self.sessions.insert_one({
+                'login': login,
+                'token': token
+            })
+            return jsonify(
+                result='ok',
+                description='user successfully found, authorization completed',
+            token=token)
+
+        else:
+            return jsonify(
+            result='error',
+            description='login or password incorrect'
+        )
 
     def add_user(self, login, password):
         if self.does_user_exist(login):
@@ -55,12 +72,19 @@ class DatabaseController:
                 desctiprion='Error occurred, no users deleted'
             )
 
-    def change_login(self, login, new_login):
+    def change_login(self, login, new_login, token):
         if not self.does_user_exist(login):
             return jsonify(
                 result='error',
                 desctiprion='No users matched chosen login, no login was changed'
             )
+
+        elif not self.is_token_correct(login, token):
+            return jsonify(
+                result='error',
+                description='That users has no such authorized sessions'
+            )
+
         else:
             self.users.update_one({
                     'login': login},
@@ -94,11 +118,22 @@ class DatabaseController:
             'login': login
         }))
 
-    def add_weight(self, login, date, value):
+    def is_token_correct(self, login, token):
+        return bool(self.sessions.find({
+            'login': login,
+            'token': token}))
+
+    def add_weight(self, login, date, value, token):
+
         if not self.does_user_exist(login):
             return jsonify(
                 result='error',
                 desctiprion='No users matched chosen login, cant add weight'
+            )
+        if not self.is_token_correct(login, token):
+            return jsonify(
+                result='error',
+                description='That users has no such authorized sessions'
             )
         elif bool(self.weights.find_one({
             'login': login,
@@ -120,5 +155,16 @@ class DatabaseController:
             )
 
     # TODO implement
-    def find_weight(self, login, start, end):
+    def find_weight(self, login, start, end, token):
+        if not self.does_user_exist(login):
+            return jsonify(
+                result='error',
+                desctiprion='No users matched chosen login, cant add weight'
+            )
+        if not self.is_token_correct(login, token):
+            return jsonify(
+                result='error',
+                description='That users has no such authorized sessions'
+            )
+
         pass

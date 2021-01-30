@@ -10,16 +10,7 @@ db = DatabaseController()
 def authorize_user():
     login = request.args["login"]
     password = request.args["password"]
-    if db.authorize(login, password):
-        return jsonify(
-            result='ok',
-            description='user successfully found, authorization complete'
-        )
-    else:
-        return jsonify(
-            result='error',
-            description='login or password incorrect'
-        )
+    return db.authorize(login, password)
 
 
 @app.route("/users/add/")
@@ -50,11 +41,12 @@ def find_user():
         )
 
 
-@app.route("/users/change_login/", methods=['PUT'])
+@app.route("/users/change_login/")
 def change_login():
     login = request.args["login"]
     new_login = request.args["new_login"]
-    return db.change_login(login, new_login)
+    token = request.args["token"]
+    return db.change_login(login, new_login, token)
 
 
 @app.route("/users/change_password/")
@@ -74,7 +66,8 @@ def add_weight():
     login = request.args["login"]
     date = request.args["date"]
     value = request.args["value"]
-    return db.add_weight(login, date, value)
+    token = request.args["token"]
+    return db.add_weight(login, date, value, token)
 
 
 @app.route("/weights/find/")
@@ -82,7 +75,8 @@ def find_weights():
     login = request.args["login"]
     start = request.args["start"]
     end = request.args["end"]
-    return db.find_weight(login, start, end)
+    token = request.args["token"]
+    return db.find_weight(login, start, end, token)
 
 
 if __name__ == "__main__":
