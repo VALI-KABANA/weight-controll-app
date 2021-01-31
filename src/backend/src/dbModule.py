@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from flask import jsonify
 import time
+from datetime import datetime
 from dbLogger import CommandLogger
 from hasher import are_similar, get_hash
 
@@ -146,7 +147,7 @@ class DatabaseController:
         else:
             self.weights.insert_one({
                 'login': login,
-                'date': date,
+                'date' : datetime.strptime(date, '%a, %d %b %Y %H:%M:%S').isoformat(),
                 'value': value
             })
             return jsonify(
