@@ -3,6 +3,7 @@ from flask import jsonify
 import time
 from datetime import datetime
 from dbLogger import CommandLogger
+from types import SimpleNamespaces
 from hasher import are_similar, get_hash
 import json
 
@@ -167,7 +168,7 @@ class DatabaseController:
                 status='error',
                 description='That users has no such authorized sessions'
             )
-        in_needed_time_segment = list(filter(lambda weight: weight['date'] >= start and weight['date'] <= end),  map(lambda weight: {datetime.fromisoformat(weight['date']).strptime("%Y-%m-%d"), weight['value']}, list(self.weights.find({'login': login}))))
+        in_needed_time_segment = list(filter(lambda weight: weight.date >= start and weight.date <= end),  map(lambda weight: type('obj', (object,), {'date': datetime.fromisoformat(weight['date']).strptime("%Y-%m-%d"), 'value' : weight['value']}), list(self.weights.find({'login': login}))))
         if(in_needed_time_segment):
             return jsonify(
                 status='ok',

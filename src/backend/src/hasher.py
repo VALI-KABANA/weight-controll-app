@@ -1,4 +1,3 @@
-
 import bcrypt
 
 def get_hash(password):
