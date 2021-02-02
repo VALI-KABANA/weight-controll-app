@@ -3,7 +3,6 @@ from flask import jsonify
 import time
 from datetime import datetime
 from dbLogger import CommandLogger
-from types import SimpleNamespaces
 from hasher import are_similar, get_hash
 import json
 
