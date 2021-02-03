@@ -31,12 +31,12 @@ def find_user():
     login = request.args["login"]
     if db.does_user_exist(login):
         return jsonify(
-            result='ok',
+            result=True,
             description='user successfully found'
         )
     else:
         return jsonify(
-            result='error',
+            result=False,
             description='user not found'
         )
 
