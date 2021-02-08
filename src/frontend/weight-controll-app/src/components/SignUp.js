@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary">
+    <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         VALI KABANA
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    // alignItems: "stretch",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -54,20 +54,21 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h6" fullWidth>
-          РЕГИСТРИРУЙСЯ И ВАЛИ КАБАНА
+        <Typography component="h1" variant="h5">
+          Хочешь начать Валить Кабана?
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                autoComplete="fname"
+                name="login"
                 variant="outlined"
                 required
                 fullWidth
                 id="login"
-                label="login"
-                name="login"
-                autoComplete="login"
+                label="Login"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,12 +91,12 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Начать Валить Кабана
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="signIn" variant="body2">
+                Уже Валили Кабана раньше?
               </Link>
             </Grid>
           </Grid>
