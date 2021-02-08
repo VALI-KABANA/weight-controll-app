@@ -96,7 +96,7 @@ export default function SignUp() {
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="signIn" variant="body2">
-                Уже Валили Кабана раньше?
+                Уже Валил Кабана раньше?
               </Link>
             </Grid>
           </Grid>
