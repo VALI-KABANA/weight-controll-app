@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import WeightForm from "./components/WeightForm";
@@ -17,8 +15,9 @@ class App extends Component {
       ShowGraph: false,
       ShowWeightForm: false,
       ShowTimeSegment: false,
-      isLoggedIn: false,
-      data: [],
+      Session: 0,
+      Username: 0,
+      Data: [],
     };
     this.hideComponent = this.hideComponent.bind(this);
   }
@@ -35,6 +34,12 @@ class App extends Component {
         break;
       case "WeightForm":
         this.setState({ ShowWeightForm: value });
+        break;
+      case "Username":
+        this.setState({ Username: value });
+        break;
+      case "Session":
+        this.setState({ Session: value });
         break;
       case "TimeSegment":
         this.setState({ ShowTimeSegment: value });
