@@ -2,10 +2,10 @@
 
 ## Введение
 
-Сервервая часть приложения производит работу с базой данных приложений (использованная БД - [MongoDB](https://en.wikipedia.org/wiki/MongoDB)). Коммуникация между серверной и клиентской частями приложения производится по принципу микросервисной архитектуры, а именно через порт на localhost клиент из фронта в бекенд отправляется запрос, в бекенде происходит взаимодействие с базой данных, после чего возвращается ответ (успешно ли выполнен запрос)
+Сервервая часть приложения производит работу с базой данных приложений (использованная БД - [MongoDB](https://en.wikipedia.org/wiki/MongoDB)). Она была реализована на языке Python, который является удобным языком для создания небольших приложений, на которых нет высокой нагрузки и спроса к молниеносной производительности. База данных MongoDB также проста в использовании, соответствует стандартам ACID, ко всему прочему имеет модуль для нативной работы из языка Python, поэтому решено было использовать именно её в связке и Python. Коммуникация между серверной и клиентской частями приложения производится по принципу микросервисной архитектуры, а именно через порт на localhost клиент из фронта в бекенд отправляется запрос, в бекенде происходит взаимодействие с базой данных, после чего возвращается ответ (успешно ли выполнен запрос)
 
 
-## Database structure
+## Структура Базы Данных
 
 ### Общие вещи
 
@@ -87,7 +87,7 @@ description: <описание ошибки>
   * description: add a weight instance to the Database
   * return: result with description
   
-- [ ] /weights/find/
+- [x] /weights/find/
   * Parameters:
     1. user's login
     2. start
@@ -95,13 +95,9 @@ description: <описание ошибки>
   * description: finds such weights, that correspond to specified $user and is associated with a date in segment [$start, $end]
   * return: JSON array with found weights
 
-- [ ]  /weights/delete
+- [x]  /weights/delete
 * Parameters:
     1. user's login
     2. date
   * description: deletes weight instance which corresponds to specified $user and has been taken on specified $date
   * return: result with description
-
-## Покрытие тестами
-
-- [ ] Создать тесты
