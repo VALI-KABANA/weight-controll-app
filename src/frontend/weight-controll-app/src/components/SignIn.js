@@ -102,8 +102,8 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="signUp" variant="body2">
-                {"Уже Валил Кабана раньше?"}
+              <Link href="SignUp" variant="body2">
+                {"Начать Валить Кабана?"}
               </Link>
             </Grid>
           </Grid>
