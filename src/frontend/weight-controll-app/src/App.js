@@ -10,10 +10,10 @@ class App extends Component {
     super();
     this.state = {
       name: "React",
-      ShowSignIn: true,
+      ShowSignIn: false,
       ShowSignUp: false,
       ShowGraph: false,
-      ShowWeightForm: false,
+      ShowWeightForm: true,
       ShowTimeSegment: false,
       Session: 0,
       Username: 0,
