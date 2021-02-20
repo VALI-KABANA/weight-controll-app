@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        VALI KABANA
+        Команда VALI KABANA
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -57,7 +57,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Продолжаем Валить Кабана?
+          Вход
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -66,7 +66,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Адрес электронной почты"
             name="email"
             autoComplete="email"
             autoFocus
@@ -77,14 +77,10 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Пароль"
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"
@@ -93,17 +89,17 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Продолжить Валить Кабана
+            Войти
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Забыли, как Валить Кабана?
+                Забыли пароль :(?
               </Link>
             </Grid>
             <Grid item>
               <Link href="SignUp" variant="body2">
-                {"Начать Валить Кабана?"}
+                {"Создать новый аккаунт?"}
               </Link>
             </Grid>
           </Grid>

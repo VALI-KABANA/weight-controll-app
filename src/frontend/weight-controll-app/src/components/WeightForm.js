@@ -14,7 +14,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        VALI KABANA
+        Команда VALI KABANA
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -52,7 +52,7 @@ export default function WeightControl() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Введи вес кабана
+          Новый вес
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -62,7 +62,7 @@ export default function WeightControl() {
                 required
                 fullWidth
                 name="date"
-                label="Date"
+                label="Даты"
                 type="Date"
                 id="date"
                 autoFocus
@@ -78,7 +78,7 @@ export default function WeightControl() {
                 fullWidth
                 type="Number"
                 id="weight"
-                label="Weight(kg)"
+                label="Масса в килограммах"
               />
             </Grid>
           </Grid>
@@ -89,7 +89,7 @@ export default function WeightControl() {
             color="primary"
             className={classes.submit}
           >
-            Взвесить кабана
+            Добавить
           </Button>
         </form>
       </div>

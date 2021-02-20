@@ -16,7 +16,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        VALI KABANA
+        Команда VALI KABANA
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -55,7 +55,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Хочешь начать Валить Кабана?
+          Регистрация
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -67,7 +67,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="login"
-                label="Login"
+                label="Адрес электронной почты"
                 autoFocus
               />
             </Grid>
@@ -77,7 +77,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -91,12 +91,12 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Начать Валить Кабана
+            Зарегистрироваться
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="signIn" variant="body2">
-                Уже Валил Кабана раньше?
+                Уже есть аккаунт?
               </Link>
             </Grid>
           </Grid>

@@ -16,7 +16,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        VALI KABANA
+        Команда VALI KABANA
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -55,7 +55,7 @@ export default function TimeSegment() {
         </Avatar>
 
         <Typography component="h1" variant="h5">
-          График кабан
+          График
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -98,7 +98,7 @@ export default function TimeSegment() {
             color="primary"
             className={classes.submit}
           >
-            Начать график кабана
+            Построить график
           </Button>
         </form>
       </div>
