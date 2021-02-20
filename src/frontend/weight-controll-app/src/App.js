@@ -13,7 +13,7 @@ class App extends Component {
       ShowSignIn: false,
       ShowSignUp: false,
       ShowGraph: false,
-      ShowWeightForm: true,
+      ShowWeightForm: false,
       ShowTimeSegment: false,
       Session: 0,
       Username: 0,
