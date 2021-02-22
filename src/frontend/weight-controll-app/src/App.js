@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import WeightForm from "./components/WeightForm";
 import Graph from "./components/Graph";
-import TimeSegment from "./components/TimeSegment";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       name: "React",
-      ShowSignIn: true,
-      ShowSignUp: true,
-      ShowGraph: true,
-      ShowWeightForm: true,
-      ShowTimeSegment: true,
+      show: "SignIn",
       Session: 0,
       Username: 0,
       Data: [],
@@ -48,25 +42,15 @@ class App extends Component {
     }
   }
   render() {
-    const {
-      ShowSignUp,
-      ShowSignIn,
-      ShowGraph,
-      ShowWeightForm,
-      ShowTimeSegment,
-    } = this.state;
+    const { show } = this.state;
     return (
       <div>
-        {ShowSignUp && <SignUp />}
-        {ShowSignIn && <SignIn />}
-        {ShowGraph && <Graph />}
-        {ShowWeightForm && <WeightForm />}
-        {ShowTimeSegment && <TimeSegment />}
+        {show === "SignUp" && <SignUp />}
+        {show === "SignIn" && <SignIn />}
+        {show === "Graph" && <Graph />}
       </div>
     );
   }
 }
 
-//todo return <SignUp />;
-//else return <SignIn />;
 export default App;

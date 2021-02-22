@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 from dbModule import DatabaseController
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app, resources={r"/*": {"origins": "*"}})
 db = DatabaseController()
 
 
@@ -45,8 +46,7 @@ def find_user():
 def change_login():
     login = request.args["login"]
     new_login = request.args["new_login"]
-    token = request.args["token"]
-    return db.change_login(login, new_login, token)
+    return db.change_login(login, new_login)
 
 
 @app.route("/users/change_password/")
@@ -58,7 +58,7 @@ def change_password():
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return jsonify(status="Hello World!")
 
 
 @app.route("/weights/add/")
@@ -66,8 +66,7 @@ def add_weight():
     login = request.args["login"]
     date = request.args["date"]
     value = request.args["value"]
-    token = request.args["token"]
-    return db.add_weight(login, date, value, token)
+    return db.add_weight(login, date, value)
 
 
 @app.route("/weights/find/")
@@ -75,8 +74,7 @@ def find_weights():
     login = request.args["login"]
     start = request.args["start"]
     end = request.args["end"]
-    token = request.args["token"]
-    return db.find_weight(login, start, end, token)
+    return db.find_weight(login, start, end)
 
 
 if __name__ == "__main__":

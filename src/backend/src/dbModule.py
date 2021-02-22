@@ -16,7 +16,6 @@ class DatabaseController:
         self.db = self.mongo_client['weight-app']
         self.weights = self.db['weights']
         self.users = self.db['users']
-        self.sessions = self.db['sessions']
 
     def authorize(self, login, password):
         if not self.does_user_exist(login):
@@ -28,15 +27,9 @@ class DatabaseController:
             'login': login
         })
         if(are_similar(password, found_user[0]['hash'])):
-            token = int(time.time())
-            self.sessions.insert_one({
-                'login': login,
-                'token': token
-            })
             return jsonify(
                 status=True,
-                description='user successfully found, authorization completed',
-            token=token)
+                description='user successfully found, authorization completed')
 
         else:
             return jsonify(
@@ -74,19 +67,12 @@ class DatabaseController:
                 desctiprion='Error occurred, no users deleted'
             )
 
-    def change_login(self, login, new_login, token):
+    def change_login(self, login, new_login):
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
                 desctiprion='No users matched chosen login, no login was changed'
             )
-
-        elif not self.is_token_correct(login, token):
-            return jsonify(
-                status=False,
-                description='That users has no such authorized sessions'
-            )
-
         else:
             self.users.update_one({
                     'login': login},
@@ -120,22 +106,12 @@ class DatabaseController:
             'login': login
         }))
 
-    def is_token_correct(self, login, token):
-        return bool(self.sessions.find({
-            'login': login,
-            'token': token}))
-
-    def add_weight(self, login, date, value, token):
+    def add_weight(self, login, date, value):
 
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
                 desctiprion='No users matched chosen login, cant add weight'
-            )
-        if not self.is_token_correct(login, token):
-            return jsonify(
-                status=False,
-                description='That users has no such authorized sessions'
             )
         elif bool(self.weights.find_one({
             'login': login,
@@ -156,16 +132,11 @@ class DatabaseController:
                 desctiption='weight added to database'
             )
 
-    def find_weight(self, login, start, end, token):
+    def find_weight(self, login, start, end):
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
                 desctiprion='No users matched chosen login, cant add weight'
-            )
-        if not self.is_token_correct(login, token):
-            return jsonify(
-                status=False,
-                description='That users has no such authorized sessions'
             )
         in_needed_time_segment = list(filter(lambda weight: weight.date >= start and weight.date <= end),  map(lambda weight: type('obj', (object,), {'date': datetime.fromisoformat(weight['date']).strptime("%Y-%m-%d"), 'value' : weight['value']}), list(self.weights.find({'login': login}))))
         if(in_needed_time_segment):
