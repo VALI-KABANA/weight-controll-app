@@ -10,7 +10,6 @@ mongo_client = MongoClient('localhost', 27017)
 db = mongo_client['weight-app']
 weights = db['weights']
 users = db['users']
-sessions = db['sessions']
 
 def gen_logins():
     for i in range(50):
@@ -29,14 +28,11 @@ def gen_weights():
     for user in users_list:
         count = random.randint(0, 10)
         for i in range (count):
-            token = sessions.find_one({'login': user})['login']
-            # TODO randomize start end; debug :D
-            request = "http://127.0.0.1:5000/weights/find/?login={login}&start={start}&end={end}&token={token}".format(login=user, token=token,
-                                                                                                                       start=:D, end=:D)
-            # print(request)
+            print(i)
+           #  request = "http://127.0.0.1:5000/weights/find/?login={login}&start={start}&end={end}".format(login=user, start=, end=:D)
 
 
 def gen_date():
-    gen_weights()
+    gen_logins()
 if __name__ == "__main__":
     gen_date()
