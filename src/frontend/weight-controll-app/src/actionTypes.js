@@ -1,3 +1,4 @@
+
 export const ADD_WEIGHT = "ADD_WEIGHT";
 export const ADD_WEIGHT_RESPONSE = "ADD_WEIGHT_RESPONSE";
 export const CREATE_USER = "CREATE_USER";
@@ -9,10 +10,10 @@ export const LOGOUT_USER_RESPONSE = "LOGOUT_USER_RESPONSE";
 export const GET_NEW_PLOT = "GET_NEW_PLOT";
 export const GET_NEW_PLOT_RESPONSE = "GET_NEW_PLOT_RESPONSE";
 
-export function loginUser(user) {
+export default function loginUser(user) {
   // user = {login: ..., password: ...}
   //
-  return { type: LOGIN_USER, user };
+  return { type: LOGIN_USER, login: user.login, password: user.password };
 }
 
 export function createUser(user) {

@@ -1,17 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
+import json
 from dbModule import DatabaseController
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+cost = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 db = DatabaseController()
 
-
-@app.route("/users/authorize/")
+@app.route("/users/authorize", methods=['POST', 'GET', 'DELETE', 'PUT'])
+@cross_origin()
 def authorize_user():
-    login = request.args["login"]
-    password = request.args["password"]
-    return db.authorize(login, password)
+    user = request.get_json()
+    login = user['login']
+    password = user['password']
+    result = db.authorize(login, password)
+    print(result)
+    return jsonify(st=0), 200
+    if result:
+        return Response("{'st':'1'}", status=201, mimetype='application/json')
+    else:
+        return jsonify(st=0), 200
+
 
 
 @app.route("/users/add/")

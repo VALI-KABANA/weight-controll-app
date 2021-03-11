@@ -19,29 +19,33 @@ class DatabaseController:
 
     def authorize(self, login, password):
         if not self.does_user_exist(login):
+            return False
             return jsonify(
                 status=False,
-                desctiprion='No users matched chosen login'
+                description='No users matched chosen login'
             )
         found_user = self.users.find({
             'login': login
         })
         if(are_similar(password, found_user[0]['hash'])):
+            return True
             return jsonify(
                 status=True,
-                description='user successfully found, authorization completed')
+                description='user successfully found, authorization completed'
+            )
 
         else:
+            return False
             return jsonify(
-            status=False,
-            description='login or password incorrect'
-        )
+                status=False,
+                description='login or password incorrect'
+            )
 
     def add_user(self, login, password):
         if self.does_user_exist(login):
             return jsonify(
                 status=False,
-                desctiprion='User already exists'
+                description='User already exists'
             )
         hashed_password = get_hash(password)
         self.users.insert_one({
@@ -50,7 +54,7 @@ class DatabaseController:
         })
         return jsonify(
             status=True,
-            desctiption='user added successfully'
+            description='user added successfully'
         )
 
     def delete_user(self, login):
@@ -59,19 +63,19 @@ class DatabaseController:
         }).deleted_count > 0):
             return jsonify(
                 status=True,
-                desctiption='user deleted successfully'
+                description='user deleted successfully'
             )
         else:
             return jsonify(
                 status=False,
-                desctiprion='Error occurred, no users deleted'
+                description='Error occurred, no users deleted'
             )
 
     def change_login(self, login, new_login):
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
-                desctiprion='No users matched chosen login, no login was changed'
+                description='No users matched chosen login, no login was changed'
             )
         else:
             self.users.update_one({
@@ -81,14 +85,14 @@ class DatabaseController:
                 }})
             return jsonify(
                 status=True,
-                desctiption='login changed successfully'
+                description='login changed successfully'
             )
 
     def change_password(self, login, new_password):
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
-                desctiprion='No users matched chosen login, no password was changed'
+                description='No users matched chosen login, no password was changed'
             )
         else:
             self.users.update_one({
@@ -98,7 +102,7 @@ class DatabaseController:
                 }})
             return jsonify(
                 status=True,
-                desctiption='password changed successfully'
+                description='password changed successfully'
             )
 
     def does_user_exist(self, login):
@@ -111,7 +115,7 @@ class DatabaseController:
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
-                desctiprion='No users matched chosen login, cant add weight'
+                description='No users matched chosen login, cant add weight'
             )
         elif bool(self.weights.find_one({
             'login': login,
@@ -119,7 +123,7 @@ class DatabaseController:
         })):
             return jsonify(
                 status=False,
-                desctiption='current user already has a value for that date'
+                description='current user already has a value for that date'
             )
         else:
             self.weights.insert_one({
@@ -129,14 +133,14 @@ class DatabaseController:
             })
             return jsonify(
                 status=True,
-                desctiption='weight added to database'
+                description='weight added to database'
             )
 
     def find_weight(self, login, start, end):
         if not self.does_user_exist(login):
             return jsonify(
                 status=False,
-                desctiprion='No users matched chosen login, cant add weight'
+                description='No users matched chosen login, cant add weight'
             )
         in_needed_time_segment = list(filter(lambda weight: weight.date >= start and weight.date <= end),  map(lambda weight: type('obj', (object,), {'date': datetime.fromisoformat(weight['date']).strptime("%Y-%m-%d"), 'value' : weight['value']}), list(self.weights.find({'login': login}))))
         if(in_needed_time_segment):
